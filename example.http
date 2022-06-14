@@ -1,1 +1,24 @@
-GET irm -Method get -Uri 'http://localhost:7071/api/aaaExample' HTTP/1.1
+### example
+GET http://localhost:7071/api/aaaExample HTTP/1.1
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### Better dynamic groups
+GET http://localhost:7071/api/bbbBetterDynamicGroup HTTP/1.1
