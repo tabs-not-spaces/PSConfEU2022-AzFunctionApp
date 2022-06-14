@@ -2,5 +2,5 @@
 # https://github.com/Azure/azure-functions-docker/blob/dev/host/3.0/buster/amd64/powershell
 
 # Update the VARIANT arg in devcontainer.json to pick a supported PowerShell version: 7, 6
-ARG VARIANT=7.2 
+ARG VARIANT=7.2
 FROM mcr.microsoft.com/azure-functions/powershell:4-powershell${VARIANT}-core-tools

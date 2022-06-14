@@ -23,7 +23,8 @@
 			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
 				"ms-azuretools.vscode-azurefunctions",
-				"ms-vscode.powershell"
+				"ms-vscode.powershell",
+				"humao.rest-client"
 			]
 		}
 	},
