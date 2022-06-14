@@ -6,7 +6,7 @@
 		"dockerfile": "Dockerfile",
 		"args": {
 			// Update the VARIANT arg to pick a supported PowerShell version: 7, 6
-			"VARIANT": "7"
+			"VARIANT": "7.2"
 		}
 	},
 	"forwardPorts": [ 7071 ],
