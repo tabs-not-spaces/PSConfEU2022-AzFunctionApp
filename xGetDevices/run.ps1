@@ -3,18 +3,29 @@ using namespace System.Net
 # Input bindings are passed in via param block.
 param($Request, $TriggerMetadata)
 try {
+    #region auth
     if ($env:MSI_SECRET) { $token = (Get-AzAccessToken -ResourceUrl "https://graph.microsoft.com/").Token }
     else {
-        $cred = (New-Object System.Management.Automation.PSCredential $env:appId, ($env:secret | ConvertTo-SecureString -AsPlainText -Force))
-        Connect-AzAccount -ServicePrincipal -Credential $cred -Tenant $env:tenant | Out-Null
+        Disable-AzContextAutosave -Scope Process | Out-Null
+        $cred = New-Object System.Management.Automation.PSCredential $env:appId, ($env:secret | ConvertTo-SecureString -AsPlainText -Force)
+        Connect-AzAccount -ServicePrincipal -Credential $cred -Tenant $env:tenant
         $token = (Get-AzAccessToken -ResourceUrl 'https://graph.microsoft.com').Token
+        $authHeader = @{Authorization = "Bearer $token"}
     }
-
-    $restCall = Invoke-RestMethod -Method Get -uri "https://graph.microsoft.com/beta/devices" -Headers @{Authorization = "Bearer $token"} -ContentType 'Application/Json'
-    write-output $($restCall | ConvertTo-Json)
+    #endregion
+    #region main process
+    $params = @{
+        Method = 'Get'
+        Uri = 'https://graph.microsoft.com/beta/devices'
+        Headers = $authHeader
+        ContentType = 'Application/Json'
+    }
+    $restCall = Invoke-RestMethod @params
+    Write-Output "Devices Found: $($restCall.value.count)"
     $resp = $restCall.value | ConvertTo-Json -Depth 100
     $statusCode = [HttpStatusCode]::OK
     $body = $resp
+    #endregion
 }
 catch {
     write-output $_.Exception.Message

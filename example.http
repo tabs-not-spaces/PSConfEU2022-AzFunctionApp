@@ -1,5 +1,5 @@
 ### example
-GET http://localhost:7071/api/aaaExample HTTP/1.1
+GET http://localhost:7071/api/xGetDevices HTTP/1.1
 
 
 
@@ -21,4 +21,4 @@ GET http://localhost:7071/api/aaaExample HTTP/1.1
 
 
 ### Better dynamic groups
-GET http://localhost:7071/api/bbbBetterDynamicGroup HTTP/1.1
+GET http://localhost:7071/api/xxInvokeDynamicGroup HTTP/1.1
